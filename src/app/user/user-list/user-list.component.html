@@ -1,0 +1,55 @@
+<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.7/css/boxicons.min.css">-->
+<p>
+</p>
+<div style="left: 150px; position: relative">
+  <form class="form-inline my-2 my-lg-0">
+    <input type="search" (ngModelChange)="searchUsers(key.value)" #key="ngModel" ngModel
+           name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search users..." required>
+    <i class="fa fa-search"></i>
+  </form>
+</div>
+<p>
+</p>
+<div class="container">
+  <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+    <div class="col" *ngFor="let user of users">
+      <div class="card radius-15 bg-info">
+        <div class="card-body text-center">
+          <div class="p-4 radius-15">
+            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" width="110" height="110"
+                 class="rounded-circle shadow p-1 bg-white" alt="">
+            <h5 class="mb-0 mt-5 text-white">{{user.name}} {{user.surname}}</h5>
+            <p></p>
+            <div class="d-grid"><a [routerLink]="['./',user.userId]" class="btn btn-white radius-15">Profile</a>
+              <p></p>
+                <a (click)="openModal(template2)" class="table-link danger" data-placement="top"
+                 data-original-title="Delete" style="position: relative; left: 10px">
+                <button class="btn btn-circle btn-danger text-white" href="javascript:void(0)">
+                  <i class="fa fa-trash"></i>
+                </button>
+                <span class="ml-2 font-normal text-dark"></span></a>
+            </div>
+            <ng-template #template2>
+              <div class="modal-header">
+                <h4 class="modal-title pull-left">Delete {{user.name}}?</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete client?</p>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalRef.hide()">No
+                  </button>
+                  <button (click)="onDeleteUser(user.userId)" class="btn btn-danger"
+                          data-dismiss="modal">Yes
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
